@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "title": "Mastering Next.js 15",
+    "author": "Ariful Islam",
+    "description": "Unlock the power of Server Components and App Router for high-performance web apps.",
+    "category": "Tech",
+    "available_quantity": 8,
+    "image_url": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=600"
+  },
+  {
+    "id": 2,
+    "title": "The Silent Shadows",
+    "author": "Tahmina Akhter",
+    "description": "A gripping mystery set in the misty hills where every secret has a price.",
+    "category": "Story",
+    "available_quantity": 12,
+    "image_url": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=600"
+  },
+  {
+    "id": 3,
+    "title": "Quantum Horizon",
+    "author": "Dr. Rafiqul Bari",
+    "description": "Deep dive into the mysteries of the universe, from black holes to subatomic particles.",
+    "category": "Science",
+    "available_quantity": 5,
+    "image_url": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600"
+  },
+  {
+    "id": 4,
+    "title": "Clean UI Design",
+    "author": "Sarah J. Rahat",
+    "description": "Learn the fundamental principles of minimalist and effective user interface design.",
+    "category": "Tech",
+    "available_quantity": 7,
+    "image_url": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600"
+  },
+  {
+    "id": 5,
+    "title": "Echoes of Eternity",
+    "author": "Zayan Ahmed",
+    "description": "A heart-touching story about love, loss, and the connections that bind us all.",
+    "category": "Story",
+    "available_quantity": 10,
+    "image_url": "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=600"
+  },
+  {
+    "id": 6,
+    "title": "Bio-Genetics 2050",
+    "author": "Prof. Nadia Sultana",
+    "description": "Exploring the future of human DNA and the ethical challenges of genetic engineering.",
+    "category": "Science",
+    "available_quantity": 4,
+    "image_url": "https://images.unsplash.com/photo-1532187643603-ba119ca4109e?w=600"
+  },
+  {
+    "id": 7,
+    "title": "Tailwind Mastery",
+    "author": "Sabbir Hossain",
+    "description": "Build stunning, responsive websites in record time using utility-first CSS.",
+    "category": "Tech",
+    "available_quantity": 15,
+    "image_url": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600"
+  },
+  {
+    "id": 8,
+    "title": "The Last Kingdom",
+    "author": "Bernard Hasan",
+    "description": "An epic historical saga about the warriors who fought for their nation.",
+    "category": "Story",
+    "available_quantity": 6,
+    "image_url": "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=600"
+  },
+  {
+    "id": 9,
+    "title": "Cyber Security 101",
+    "author": "Mahadi Bin Faruk",
+    "description": "Protect your digital identity and learn how to defend against modern cyber threats.",
+    "category": "Tech",
+    "available_quantity": 9,
+    "image_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600"
+  },
+  {
+    "id": 10,
+    "title": "The Red Planet",
+    "author": "Elena Gilbert",
+    "description": "Everything you need to know about the first human mission to Mars.",
+    "category": "Science",
+    "available_quantity": 3,
+    "image_url": "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600"
+  },
+  {
+    "id": 11,
+    "title": "JavaScript Alchemy",
+    "author": "Tanvir Rahman",
+    "description": "Mastering advanced functional programming and asynchronous patterns in JavaScript.",
+    "category": "Tech",
+    "available_quantity": 11,
+    "image_url": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600"
+  },
+  {
+    "id": 12,
+    "title": "Beyond the Stars",
+    "author": "Neil deGrasse Joy",
+    "description": "A journey through the galaxies, explaining astrophysics in a simple way.",
+    "category": "Science",
+    "available_quantity": 2,
+    "image_url": "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=600"
+  }
+]
