@@ -19,32 +19,52 @@ export default function RegisterPage() {
 
   const handleRegister = async e => {
     e.preventDefault();
+
+    if (formData.password.length < 8) {
+      toast.error('Password must be at least 8 characters!');
+      return;
+    }
+
     setLoading(true);
 
     try {
-
-      const { data, error } = await authClient.signUp.email({
-        email: formData.email,
-        password: formData.password,
-        name: formData.name,
-        image: formData.photoUrl,
-        callbackURL: '/login',
-      });
-
-      if (error) {
-       
-        toast.error(error.message || 'Registration failed!');
-        console.error('BetterAuth Error:', error);
-      } else {
-        
-        toast.success('Registration successful! Please login.');
-        router.push('/login');
-      }
+      await authClient.signUp.email(
+        {
+          email: formData.email,
+          password: formData.password,
+          name: formData.name,
+          ...(formData.photoUrl && { image: formData.photoUrl }),
+          callbackURL: '/login',
+        },
+        {
+          onSuccess: () => {
+            toast.success('Registration successful! Please login.');
+            router.push('/login');
+          },
+          onError: ctx => {
+            const message =
+              ctx.error?.message || ctx.error?.code || 'Registration failed!';
+            toast.error(message);
+            console.error('BetterAuth Error:', JSON.stringify(ctx.error));
+          },
+        },
+      );
     } catch (err) {
       toast.error('Something went wrong!');
       console.error('System Error:', err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await authClient.signIn.social({
+        provider: 'google',
+        callbackURL: '/',
+      });
+    } catch (err) {
+      toast.error('Google registration failed!');
     }
   };
 
@@ -61,14 +81,14 @@ export default function RegisterPage() {
         </div>
 
         <form onSubmit={handleRegister} className="space-y-5">
-       
+          {/* Name Input */}
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-2 ml-1">
               Full Name
             </label>
             <input
               type="text"
-              className="w-full px-5 py-4 rounded-2xl border border-gray-100 bg-gray-50/50 text-gray-900 focus:bg-white focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition-all placeholder:text-gray-400"
+              className="w-full px-5 py-4 rounded-2xl border border-gray-100 bg-gray-50/50 text-gray-900 focus:bg-white focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition-all"
               placeholder="Jakaria Ahmed"
               value={formData.name}
               onChange={e => setFormData({ ...formData, name: e.target.value })}
@@ -76,13 +96,14 @@ export default function RegisterPage() {
             />
           </div>
 
+          {/* Email Input */}
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-2 ml-1">
               Email Address
             </label>
             <input
               type="email"
-              className="w-full px-5 py-4 rounded-2xl border border-gray-100 bg-gray-50/50 text-gray-900 focus:bg-white focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition-all placeholder:text-gray-400"
+              className="w-full px-5 py-4 rounded-2xl border border-gray-100 bg-gray-50/50 text-gray-900 focus:bg-white focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition-all"
               placeholder="name@example.com"
               value={formData.email}
               onChange={e =>
@@ -92,45 +113,48 @@ export default function RegisterPage() {
             />
           </div>
 
-      
+          {/* Photo URL Input */}
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-2 ml-1">
-              Photo URL
+              Photo URL{' '}
+              <span className="text-gray-400 font-normal">(optional)</span>
             </label>
             <input
-              type="text"
-              className="w-full px-5 py-4 rounded-2xl border border-gray-100 bg-gray-50/50 text-gray-900 focus:bg-white focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition-all placeholder:text-gray-400"
+              type="url"
+              className="w-full px-5 py-4 rounded-2xl border border-gray-100 bg-gray-50/50 text-gray-900 focus:bg-white focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition-all"
               placeholder="https://image-link.com"
               value={formData.photoUrl}
               onChange={e =>
                 setFormData({ ...formData, photoUrl: e.target.value })
               }
-              required
             />
           </div>
 
-      
+          {/* Password Input */}
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-2 ml-1">
               Password
             </label>
             <input
               type="password"
-              className="w-full px-5 py-4 rounded-2xl border border-gray-100 bg-gray-50/50 text-gray-900 focus:bg-white focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition-all placeholder:text-gray-400"
+              className="w-full px-5 py-4 rounded-2xl border border-gray-100 bg-gray-50/50 text-gray-900 focus:bg-white focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 outline-none transition-all"
               placeholder="••••••••"
               value={formData.password}
               onChange={e =>
                 setFormData({ ...formData, password: e.target.value })
               }
+              minLength={8}
               required
             />
+            <p className="text-xs text-gray-400 mt-1 ml-1">
+              Minimum 8 characters
+            </p>
           </div>
 
-       
           <button
             disabled={loading}
             type="submit"
-            className={`w-full py-4 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-2xl transition-all shadow-lg shadow-orange-200 transform active:scale-[0.98] ${
+            className={`w-full py-4 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-2xl transition-all shadow-lg shadow-orange-200 transform active:scale-95 flex justify-center items-center ${
               loading ? 'opacity-70 cursor-not-allowed' : ''
             }`}
           >
@@ -151,13 +175,8 @@ export default function RegisterPage() {
 
         <button
           type="button"
-          onClick={async () => {
-            await authClient.signIn.social({
-              provider: 'google',
-              callbackURL: '/',
-            });
-          }}
-          className="w-full py-4 border-2 border-gray-50 rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-gray-50 transition-all active:scale-[0.98]"
+          onClick={handleGoogleSignIn}
+          className="w-full py-4 border-2 border-gray-50 rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-gray-50 transition-all active:scale-95"
         >
           <img
             src="https://www.svgrepo.com/show/475656/google-color.svg"

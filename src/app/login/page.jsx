@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { authClient } from '@/lib/auth-client';
 import toast from 'react-hot-toast';
-import Image from 'next/image';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -18,19 +17,24 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const { data, error } = await authClient.signIn.email({
-        email,
-        password,
-        callbackURL: '/',
-      });
-
-      if (error) {
-        toast.error(error.message || 'Login failed!');
-      } else {
-        toast.success('Login successful!');
-        router.push('/');
-        router.refresh();
-      }
+      await authClient.signIn.email(
+        {
+          email,
+          password,
+          callbackURL: '/',
+        },
+        {
+          // better-auth এ অনেক সময় অন-সাকসেস হুক ব্যবহার করা ভালো
+          onSuccess: () => {
+            toast.success('Login successful!');
+            router.push('/');
+            router.refresh();
+          },
+          onError: ctx => {
+            toast.error(ctx.error.message || 'Login failed!');
+          },
+        },
+      );
     } catch (err) {
       toast.error('Something went wrong!');
     } finally {
@@ -39,10 +43,14 @@ export default function LoginPage() {
   };
 
   const handleGoogleLogin = async () => {
-    await authClient.signIn.social({
-      provider: 'google',
-      callbackURL: '/',
-    });
+    try {
+      await authClient.signIn.social({
+        provider: 'google',
+        callbackURL: '/',
+      });
+    } catch (err) {
+      toast.error('Google login failed!');
+    }
   };
 
   return (
@@ -89,11 +97,37 @@ export default function LoginPage() {
           <button
             disabled={loading}
             type="submit"
-            className={`w-full py-4 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-2xl transition-all shadow-lg shadow-orange-200 transform active:scale-95 ${
+            className={`w-full py-4 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-2xl transition-all shadow-lg shadow-orange-200 transform active:scale-95 flex justify-center items-center ${
               loading ? 'opacity-70 cursor-not-allowed' : ''
             }`}
           >
-            {loading ? 'Signing In...' : 'Sign In'}
+            {loading ? (
+              <span className="flex items-center gap-2">
+                <svg
+                  className="animate-spin h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+                Signing In...
+              </span>
+            ) : (
+              'Sign In'
+            )}
           </button>
         </form>
 
@@ -113,9 +147,7 @@ export default function LoginPage() {
           type="button"
           className="w-full py-4 border-2 border-gray-50 rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-gray-50 transition-all active:scale-95"
         >
-          <Image
-            height={24}
-            width={24}
+          <img
             src="https://www.svgrepo.com/show/475656/google-color.svg"
             className="w-6 h-6"
             alt="Google"

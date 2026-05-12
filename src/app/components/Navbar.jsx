@@ -31,20 +31,15 @@ const Navbar = () => {
   return (
     <nav className="bg-[#fffef5] border-b border-orange-100 py-3 px-6 sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
+        {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
           <div className="p-2 bg-orange-100 rounded-lg group-hover:bg-orange-200 transition-colors">
             <Library className="w-7 h-7 text-orange-600" />
           </div>
-          <div className="flex flex-col">
-            <span className="text-xl font-extrabold text-gray-800 tracking-tight leading-none">
-              MANGO
-            </span>
-            <span className="text-xs font-semibold text-orange-500 tracking-[0.2em] uppercase">
-              Library
-            </span>
-          </div>
+          <span className="font-bold text-xl text-gray-800">BookHub</span>
         </Link>
 
+        {/* Navigation Links */}
         <div className="hidden md:flex items-center gap-1">
           <Link
             href="/"
@@ -86,6 +81,7 @@ const Navbar = () => {
           )}
         </div>
 
+        {/* Auth Buttons / User Profile */}
         <div className="flex items-center gap-3">
           {session ? (
             <div className="flex items-center gap-3 bg-white border border-orange-100 p-1 rounded-full pl-4 shadow-sm">
@@ -94,7 +90,7 @@ const Navbar = () => {
                   Welcome
                 </span>
                 <span className="text-xs font-black text-gray-800">
-                  {session.user.name.split(' ')[0]}
+                  {session.user?.name?.split(' ')[0]}
                 </span>
               </div>
               <button
