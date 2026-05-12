@@ -1,5 +1,6 @@
 import './globals.css';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import { Toaster } from 'react-hot-toast';
 
 export const metadata = {
@@ -14,10 +15,10 @@ export default function RootLayout({ children }) {
         <Toaster position="top-center" reverseOrder={false} />
 
         <Navbar />
-        {/* ফুটার আপাতত বাদ দেওয়া হয়েছে */}
-        <main style={{ minHeight: '80vh', paddingTop: '100px' }}>
-          {children}
-        </main>
+
+        <main style={{ minHeight: '80vh' }}>{children}</main>
+
+        <Footer />
       </body>
     </html>
   );
