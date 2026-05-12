@@ -23,7 +23,7 @@ const Navbar = () => {
   return (
     <nav className="bg-[#fffef5] border-b border-orange-100 py-3 px-6 sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* লোগো সেকশন */}
+       
         <Link href="/" className="flex items-center gap-2 group">
           <div className="p-2 bg-orange-100 rounded-lg group-hover:bg-orange-200 transition-colors">
             <Library className="w-7 h-7 text-orange-600" />
@@ -38,7 +38,7 @@ const Navbar = () => {
           </div>
         </Link>
 
-        {/* মাঝখানের লিঙ্কসমূহ - Home, All Books এবং My Profile পাশাপাশি */}
+       
         <div className="hidden md:flex items-center gap-1">
           <Link
             href="/"
@@ -62,7 +62,7 @@ const Navbar = () => {
             <BookOpen className="w-4 h-4" />
             All Books
           </Link>
-          {/* My Profile লিঙ্কটি এখানে যোগ করা হলো */}
+         
           <Link
             href="/profile"
             className={`flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all ${
@@ -76,7 +76,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* ডানদিকের বাটন সেকশন */}
+    
         <div className="flex items-center gap-3">
           {session ? (
             <div className="flex items-center gap-3 bg-white border border-gray-200 p-1 rounded-full pl-4 shadow-sm">
@@ -91,7 +91,7 @@ const Navbar = () => {
               </button>
             </div>
           ) : (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 ">
               <Link
                 href="/login"
                 className="px-5 py-2 text-sm font-bold text-gray-600 hover:text-gray-900 transition-colors"
