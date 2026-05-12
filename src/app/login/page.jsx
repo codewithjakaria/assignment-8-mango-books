@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { authClient } from '@/lib/auth-client';
 import toast from 'react-hot-toast';
+import Image from 'next/image';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -112,7 +113,9 @@ export default function LoginPage() {
           type="button"
           className="w-full py-4 border-2 border-gray-50 rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-gray-50 transition-all active:scale-95"
         >
-          <img
+          <Image
+            height={24}
+            width={24}
             src="https://www.svgrepo.com/show/475656/google-color.svg"
             className="w-6 h-6"
             alt="Google"
