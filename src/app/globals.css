@@ -1,2 +1,26 @@
 @import "tailwindcss";
 
+
+@layer base {
+  .swiper-pagination-bullet {
+    background: #f97316 !important;
+    opacity: 0.5;
+  }
+  .swiper-pagination-bullet-active {
+    background: #f97316 !important;
+    opacity: 1;
+  }
+}
+
+
+.swiper {
+  padding-bottom: 50px !important;
+  padding-top: 10px !important;
+  overflow: visible !important;
+}
+
+
+.swiper-button-next, .swiper-button-prev {
+  color: #f97316 !important;
+  transform: scale(0.6); 
+}

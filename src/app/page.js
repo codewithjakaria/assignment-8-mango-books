@@ -6,6 +6,7 @@ import Marquee from 'react-fast-marquee';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
+
 import 'swiper/css/bundle';
 
 import BookCard from './components/BookCard';
