@@ -24,7 +24,7 @@ export default function LoginPage() {
           callbackURL: '/',
         },
         {
-          // better-auth এ অনেক সময় অন-সাকসেস হুক ব্যবহার করা ভালো
+     
           onSuccess: () => {
             toast.success('Login successful!');
             router.push('/');

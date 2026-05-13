@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Marquee from 'react-fast-marquee';
 import BookCard from './components/BookCard';
 import HomeFeatures from './components/HomeFeatures';
+import Footer from './components/Footer';
 
 export default function Home() {
   const [featuredBooks, setFeaturedBooks] = useState([]);
@@ -14,10 +15,9 @@ export default function Home() {
       try {
         const res = await fetch('/data/books.json');
         const data = await res.json();
-
         setFeaturedBooks(data.slice(0, 4));
       } catch (error) {
-        console.error('Error loading featured books:', error);
+        console.error(error);
       }
     };
     loadBooks();
@@ -25,13 +25,12 @@ export default function Home() {
 
   return (
     <main>
-    
       <section className="relative h-[550px] flex items-center justify-center text-center bg-gray-900 text-white">
         <div className="absolute inset-0 z-0">
           <img
             src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2000"
             className="w-full h-full object-cover opacity-30"
-            alt="Library Background"
+            alt="Library"
           />
         </div>
         <div className="relative z-10 px-6">
@@ -51,7 +50,6 @@ export default function Home() {
         </div>
       </section>
 
-     
       <div className="bg-orange-100 py-4 border-y border-orange-200">
         <Marquee gradient={false} speed={60}>
           <div className="flex items-center gap-10">
@@ -71,7 +69,6 @@ export default function Home() {
         </Marquee>
       </div>
 
-   
       <section className="bg-[#fffef5] py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -92,10 +89,7 @@ export default function Home() {
         </div>
       </section>
 
-
       <HomeFeatures />
-
-      
     </main>
   );
 }

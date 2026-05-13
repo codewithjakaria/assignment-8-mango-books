@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-// আপনার স্ক্রিনশট অনুযায়ী components ফোল্ডার app এর ভেতর থাকলে এই পাথটি ঠিক আছে
 import BookCard from '../components/BookCard';
 import { Search, Filter } from 'lucide-react';
 
@@ -13,7 +12,7 @@ export default function AllBooksPage() {
   useEffect(() => {
     const loadBooks = async () => {
       try {
-        // public/data/books.json থেকে ডেটা ফেচ করা
+      
         const res = await fetch('/data/books.json');
         if (!res.ok) throw new Error('Failed to fetch data');
         const data = await res.json();
@@ -27,7 +26,7 @@ export default function AllBooksPage() {
 
   const categories = ['All', 'Story', 'Tech', 'Science'];
 
-  // সার্চ এবং ক্যাটাগরি ফিল্টার লজিক
+  
   const filteredBooks = books.filter(book => {
     const matchesSearch = book.title
       .toLowerCase()
@@ -40,7 +39,7 @@ export default function AllBooksPage() {
   return (
     <div className="bg-[#fffef5] min-h-screen pt-10 px-6 pb-20">
       <div className="max-w-7xl mx-auto">
-        {/* সার্চ বার */}
+    
         <div className="relative mb-12 max-w-2xl mx-auto">
           <input
             type="text"
@@ -53,7 +52,7 @@ export default function AllBooksPage() {
         </div>
 
         <div className="flex flex-col md:flex-row gap-10">
-          {/* ক্যাটাগরি সাইডবার */}
+     
           <aside className="w-full md:w-64 shrink-0">
             <div className="bg-white p-6 rounded-2xl border border-orange-100 sticky top-28 shadow-sm">
               <h3 className="font-bold text-gray-900 mb-6 uppercase tracking-wider flex items-center gap-2 text-sm">
@@ -78,7 +77,7 @@ export default function AllBooksPage() {
             </div>
           </aside>
 
-          {/* বইয়ের গ্রিড */}
+         
           <div className="flex-grow">
             {filteredBooks.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">

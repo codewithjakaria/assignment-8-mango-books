@@ -3,10 +3,10 @@
 import React from 'react';
 import { authClient } from '@/lib/auth-client';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link'; // Link ইমপোর্ট করা হয়েছে
+import Link from 'next/link'; 
 
 export default function ProfilePage() {
-  const { data: session, isPending } = authClient.useSession(); // সেশন চেক
+  const { data: session, isPending } = authClient.useSession(); 
   const router = useRouter();
 
   if (isPending) {
@@ -23,7 +23,7 @@ export default function ProfilePage() {
   }
 
   if (!session) {
-    router.push('/login'); // সেশন না থাকলে লগইন পেজে পাঠিয়ে দিবে
+    router.push('/login'); 
     return null;
   }
 
@@ -112,7 +112,7 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          {/* Update Button Section - এখানে পরিবর্তন করা হয়েছে */}
+       
           <div className="px-8 pb-8">
             <Link
               href="/profile/update"
