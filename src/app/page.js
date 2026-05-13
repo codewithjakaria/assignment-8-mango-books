@@ -4,9 +4,12 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Marquee from 'react-fast-marquee';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+
 import 'swiper/css';
 import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+
 import BookCard from './components/BookCard';
 import HomeFeatures from './components/HomeFeatures';
 import Footer from './components/Footer';
@@ -90,12 +93,13 @@ export default function Home() {
             slidesPerView={1}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             pagination={{ clickable: true }}
-            modules={[Autoplay, Pagination]}
+            navigation={true}
+            modules={[Autoplay, Pagination, Navigation]}
             breakpoints={{
               640: { slidesPerView: 2 },
               1024: { slidesPerView: 4 },
             }}
-            className="mySwiper"
+            className="mySwiper pb-12"
           >
             {featuredBooks.map(book => (
               <SwiperSlide key={book.id}>
@@ -109,6 +113,7 @@ export default function Home() {
       </section>
 
       <HomeFeatures />
+      
     </main>
   );
 }
