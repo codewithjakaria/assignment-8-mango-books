@@ -76,7 +76,9 @@ export default function Home() {
         </Marquee>
       </div>
 
-      <section className="bg-[#fffef5] py-24 px-6">
+      <section className="bg-[#fffef5] py-24 px-6 overflow-hidden">
+        {' '}
+     
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-black text-[#1e293b] mb-2 uppercase tracking-tight">
@@ -88,32 +90,35 @@ export default function Home() {
             </h2>
           </div>
 
-          <Swiper
-            spaceBetween={30}
-            slidesPerView={1}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
-            pagination={{ clickable: true }}
-            navigation={true}
-            modules={[Autoplay, Pagination, Navigation]}
-            breakpoints={{
-              640: { slidesPerView: 2 },
-              1024: { slidesPerView: 4 },
-            }}
-            className="mySwiper pb-12"
-          >
-            {featuredBooks.map(book => (
-              <SwiperSlide key={book.id}>
-                <div className="pb-4">
-                  <BookCard book={book} />
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          
+          <div className="relative w-full">
+            <Swiper
+              spaceBetween={30}
+              slidesPerView={1}
+              autoplay={{ delay: 3000, disableOnInteraction: false }}
+              pagination={{ clickable: true }}
+              navigation={true}
+              modules={[Autoplay, Pagination, Navigation]}
+              breakpoints={{
+                640: { slidesPerView: 2 },
+                1024: { slidesPerView: 4 },
+              }}
+              className="mySwiper !overflow-visible pb-14" 
+            >
+              {featuredBooks.map(book => (
+                <SwiperSlide key={book.id}>
+                  <div className="h-full">
+                    <BookCard book={book} />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </div>
       </section>
 
       <HomeFeatures />
-      <Footer />
+   
     </main>
   );
 }
