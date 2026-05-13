@@ -3,6 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Marquee from 'react-fast-marquee';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 import BookCard from './components/BookCard';
 import HomeFeatures from './components/HomeFeatures';
 import Footer from './components/Footer';
@@ -15,7 +19,7 @@ export default function Home() {
       try {
         const res = await fetch('/data/books.json');
         const data = await res.json();
-        setFeaturedBooks(data.slice(0, 4));
+        setFeaturedBooks(data.slice(0, 8));
       } catch (error) {
         console.error(error);
       }
@@ -81,11 +85,26 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <Swiper
+            spaceBetween={30}
+            slidesPerView={1}
+            autoplay={{ delay: 3000, disableOnInteraction: false }}
+            pagination={{ clickable: true }}
+            modules={[Autoplay, Pagination]}
+            breakpoints={{
+              640: { slidesPerView: 2 },
+              1024: { slidesPerView: 4 },
+            }}
+            className="mySwiper"
+          >
             {featuredBooks.map(book => (
-              <BookCard key={book.id} book={book} />
+              <SwiperSlide key={book.id}>
+                <div className="pb-4">
+                  <BookCard book={book} />
+                </div>
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
         </div>
       </section>
 

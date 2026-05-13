@@ -5,34 +5,29 @@ import Link from 'next/link';
 
 const BookCard = ({ book }) => {
   return (
-    <div className="bg-[#f3f4f6]/50 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col items-center text-center h-full border border-gray-100">
-      {/* Book Image */}
-      <div className="w-full aspect-[4/3] rounded-xl overflow-hidden mb-6 shadow-inner bg-white">
+    <div className="bg-white rounded-3xl p-6 shadow-sm border border-orange-50 hover:shadow-2xl transition-all duration-500 group animate__animated animate__fadeInUp">
+      <div className="relative aspect-[3/4] rounded-2xl overflow-hidden mb-6 shadow-md">
         <img
           src={book.image_url}
           alt={book.title}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
         />
+        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </div>
 
-      {/* Content */}
-      <div className="flex flex-col items-center flex-grow w-full">
-        <h3 className="text-lg font-extrabold text-gray-900 mb-1 leading-tight">
+      <div className="text-center">
+        <h3 className="text-xl font-black text-gray-900 mb-1 line-clamp-1">
           {book.title}
         </h3>
-        <p className="text-xs text-gray-500 mb-3 font-medium">
-          By {book.author}
-        </p>
+        <p className="text-gray-400 font-bold text-sm mb-4">By {book.author}</p>
 
-        <div className="mb-6">
-          <span className="text-[10px] font-bold text-blue-500 bg-blue-50 px-4 py-1 rounded-full uppercase tracking-wider border border-blue-100">
-            {book.category}
-          </span>
+        <div className="inline-block px-4 py-1 bg-orange-50 text-orange-600 rounded-full text-[10px] font-black uppercase tracking-widest mb-6">
+          {book.category}
         </div>
 
         <Link
           href={`/books/${book.id}`}
-          className="mt-auto w-full max-w-[140px] py-2.5 bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold rounded-lg transition-all active:scale-95 shadow-lg shadow-orange-200"
+          className="block w-full py-4 bg-orange-500 text-white font-black rounded-2xl hover:bg-orange-600 transition-all shadow-lg shadow-orange-100 active:scale-95 uppercase tracking-widest text-xs"
         >
           View Details
         </Link>
