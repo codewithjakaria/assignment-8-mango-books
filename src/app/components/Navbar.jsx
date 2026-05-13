@@ -29,24 +29,26 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-[#fffef5] border-b border-orange-100 py-3 px-6 sticky top-0 z-50 shadow-sm">
+    <nav className="bg-gradient-to-r from-orange-500 via-orange-400 to-amber-400 py-3 px-6 sticky top-0 z-50 shadow-lg shadow-orange-200/50">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="p-2 bg-orange-100 rounded-lg group-hover:bg-orange-200 transition-colors">
-            <Library className="w-7 h-7 text-orange-600" />
+          <div className="p-2 bg-white/20 rounded-xl group-hover:bg-white/30 transition-colors backdrop-blur-sm">
+            <Library className="w-5 h-5 text-white" />
           </div>
-          <span className="font-bold text-xl text-gray-800">BookHub</span>
+          <span className="font-black text-lg text-white tracking-tight drop-shadow-sm">
+            BookHub
+          </span>
         </Link>
 
-        {/* Navigation Links */}
+        {/* Nav Links */}
         <div className="hidden md:flex items-center gap-1">
           <Link
             href="/"
-            className={`flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all rounded-lg ${
+            className={`flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-all rounded-xl ${
               isActive('/')
-                ? 'text-orange-600 bg-orange-50'
-                : 'text-gray-500 hover:text-gray-800 hover:bg-gray-50'
+                ? 'bg-white/25 text-white'
+                : 'text-white/80 hover:text-white hover:bg-white/15'
             }`}
           >
             <Home className="w-4 h-4" />
@@ -56,10 +58,10 @@ const Navbar = () => {
           <Link
             href="/books"
             onClick={handleProtectedNavigation}
-            className={`flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all rounded-lg ${
+            className={`flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-all rounded-xl ${
               isActive('/books')
-                ? 'text-orange-600 bg-orange-50'
-                : 'text-gray-500 hover:text-gray-800 hover:bg-gray-50'
+                ? 'bg-white/25 text-white'
+                : 'text-white/80 hover:text-white hover:bg-white/15'
             }`}
           >
             <BookOpen className="w-4 h-4" />
@@ -69,10 +71,10 @@ const Navbar = () => {
           {session && (
             <Link
               href="/profile"
-              className={`flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all rounded-lg ${
+              className={`flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-all rounded-xl ${
                 isActive('/profile')
-                  ? 'text-orange-600 bg-orange-50'
-                  : 'text-gray-500 hover:text-gray-800 hover:bg-gray-50'
+                  ? 'bg-white/25 text-white'
+                  : 'text-white/80 hover:text-white hover:bg-white/15'
               }`}
             >
               <User className="w-4 h-4" />
@@ -81,36 +83,55 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Auth Buttons / User Profile */}
+        {/* Auth Section */}
         <div className="flex items-center gap-3">
           {session ? (
-            <div className="flex items-center gap-3 bg-white border border-orange-100 p-1 rounded-full pl-4 shadow-sm">
-              <div className="flex flex-col items-end pr-1">
-                <span className="text-[10px] text-gray-400 font-bold uppercase leading-none">
-                  Welcome
-                </span>
-                <span className="text-xs font-black text-gray-800">
-                  {session.user?.name?.split(' ')[0]}
-                </span>
-              </div>
+            <div className="flex items-center gap-3">
+              {/* User info + avatar */}
+              <Link
+                href="/profile"
+                className="flex items-center gap-3 bg-white/20 hover:bg-white/30 transition-colors px-3 py-2 rounded-2xl backdrop-blur-sm border border-white/20"
+              >
+                <div className="w-8 h-8 rounded-xl overflow-hidden bg-white/30 shadow-sm border-2 border-white/40">
+                  <img
+                    src={
+                      session.user?.image ||
+                      'https://www.svgrepo.com/show/507442/user-circle.svg'
+                    }
+                    alt={session.user?.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="flex flex-col leading-none">
+                  <span className="text-[9px] font-bold uppercase tracking-widest text-white/70">
+                    Welcome
+                  </span>
+                  <span className="text-sm font-black text-white">
+                    {session.user?.name?.split(' ')[0]}
+                  </span>
+                </div>
+              </Link>
+
+              {/* Logout button */}
               <button
                 onClick={handleLogout}
-                className="p-2.5 bg-rose-50 text-rose-600 rounded-full hover:bg-rose-600 hover:text-white transition-all shadow-sm"
+                className="flex items-center gap-2 px-4 py-2.5 bg-white/20 hover:bg-red-500 text-white text-sm font-bold rounded-xl transition-all duration-200 backdrop-blur-sm border border-white/20 active:scale-95"
               >
                 <LogOut className="w-4 h-4" />
+                <span className="hidden sm:inline">Logout</span>
               </button>
             </div>
           ) : (
             <div className="flex items-center gap-2">
               <Link
                 href="/login"
-                className="px-5 py-2 text-sm font-bold text-gray-600 hover:text-orange-600 transition-colors"
+                className="px-5 py-2 text-sm font-bold text-white/90 hover:text-white transition-colors"
               >
                 Login
               </Link>
               <Link
                 href="/register"
-                className="px-6 py-2.5 bg-orange-500 hover:bg-orange-600 text-white text-sm font-bold rounded-xl shadow-lg shadow-orange-100 transition-all active:scale-95 transform hover:-translate-y-0.5"
+                className="px-5 py-2.5 bg-white text-orange-500 hover:bg-orange-50 text-sm font-black rounded-xl shadow-lg transition-all active:scale-95"
               >
                 Sign Up
               </Link>
