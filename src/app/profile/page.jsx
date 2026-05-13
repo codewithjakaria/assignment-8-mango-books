@@ -3,9 +3,10 @@
 import React from 'react';
 import { authClient } from '@/lib/auth-client';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link'; // Link ইমপোর্ট করা হয়েছে
 
 export default function ProfilePage() {
-  const { data: session, isPending } = authClient.useSession();
+  const { data: session, isPending } = authClient.useSession(); // সেশন চেক
   const router = useRouter();
 
   if (isPending) {
@@ -22,7 +23,7 @@ export default function ProfilePage() {
   }
 
   if (!session) {
-    router.push('/login');
+    router.push('/login'); // সেশন না থাকলে লগইন পেজে পাঠিয়ে দিবে
     return null;
   }
 
@@ -31,14 +32,12 @@ export default function ProfilePage() {
   return (
     <div className="min-h-screen bg-[#faf9f6] py-16 px-4">
       <div className="max-w-2xl mx-auto">
-        {/* Top label */}
         <p className="text-center text-xs font-bold uppercase tracking-[0.3em] text-orange-400 mb-8">
           My Account
         </p>
 
-        {/* Main card */}
         <div className="bg-white rounded-3xl overflow-hidden shadow-xl shadow-orange-100/60 border border-orange-50">
-          {/* Banner */}
+          {/* Banner & Avatar Section */}
           <div className="h-28 bg-gradient-to-br from-orange-400 via-orange-500 to-amber-500 relative">
             <div
               className="absolute inset-0 opacity-20"
@@ -50,7 +49,6 @@ export default function ProfilePage() {
             ></div>
           </div>
 
-          {/* Avatar */}
           <div className="flex justify-center -mt-14 mb-4">
             <div className="w-28 h-28 rounded-2xl border-4 border-white shadow-lg overflow-hidden bg-orange-100 rotate-3 hover:rotate-0 transition-transform duration-300">
               <img
@@ -64,7 +62,6 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          {/* Name & email */}
           <div className="text-center px-8 pb-2">
             <h1 className="text-3xl font-black text-gray-900 tracking-tight">
               {user.name}
@@ -72,10 +69,9 @@ export default function ProfilePage() {
             <p className="text-gray-400 text-sm mt-1">{user.email}</p>
           </div>
 
-          {/* Divider */}
           <div className="mx-8 my-6 border-t border-gray-100"></div>
 
-          {/* Info grid */}
+          {/* Info Grid */}
           <div className="px-8 pb-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="bg-orange-50/60 rounded-2xl p-5 border border-orange-100/50">
               <p className="text-[10px] font-black uppercase tracking-[0.2em] text-orange-400 mb-2">
@@ -116,11 +112,14 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          {/* Update button */}
+          {/* Update Button Section - এখানে পরিবর্তন করা হয়েছে */}
           <div className="px-8 pb-8">
-            <button className="w-full py-4 bg-gray-900 hover:bg-orange-500 text-white font-bold rounded-2xl transition-all duration-300 text-sm uppercase tracking-widest shadow-lg active:scale-95 transform">
+            <Link
+              href="/profile/update"
+              className="block w-full py-4 bg-gray-900 hover:bg-orange-500 text-white text-center font-bold rounded-2xl transition-all duration-300 text-sm uppercase tracking-widest shadow-lg active:scale-95 transform"
+            >
               Update Information
-            </button>
+            </Link>
           </div>
         </div>
       </div>
