@@ -6,9 +6,7 @@ import Marquee from 'react-fast-marquee';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+import 'swiper/css/bundle';
 
 import BookCard from './components/BookCard';
 import HomeFeatures from './components/HomeFeatures';
@@ -21,6 +19,7 @@ export default function Home() {
     const loadBooks = async () => {
       try {
         const res = await fetch('/data/books.json');
+        if (!res.ok) throw new Error('Failed to fetch');
         const data = await res.json();
         setFeaturedBooks(data.slice(0, 8));
       } catch (error) {
@@ -113,7 +112,7 @@ export default function Home() {
       </section>
 
       <HomeFeatures />
-      
+      <Footer />
     </main>
   );
 }
