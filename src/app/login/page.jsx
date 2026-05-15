@@ -24,7 +24,6 @@ export default function LoginPage() {
           callbackURL: '/',
         },
         {
-     
           onSuccess: () => {
             toast.success('Login successful!');
             router.push('/');
