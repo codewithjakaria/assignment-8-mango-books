@@ -3,6 +3,11 @@
 import React from 'react';
 import Link from 'next/link';
 
+
+
+
+
+
 const BookCard = ({ book }) => {
   return (
     <div className="bg-white rounded-3xl p-6 shadow-sm border border-orange-50 hover:shadow-2xl transition-all duration-500 group animate__animated animate__fadeInUp">
